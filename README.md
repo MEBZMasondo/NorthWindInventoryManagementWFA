@@ -1,12 +1,17 @@
 # projectIMSBasicWFA
-Inventory Management using Northwind dataset Products Table
 
-A basic inventory management system solution
+- Inventory Management using Northwind dataset Products Table
+- A basic inventory management system solution
+
+# TOC
+
 
 # Project Details
-- Uses :
-C# Programming language
-SQL Server 
+- Software Used :
+  - Microsoft Visual Studio 2015 community edition 
+  - SQL Server 
+- Programming Language  
+  - Visual C# Programming language
 
 # Project Database Connectivity
 - Access the database creation script on the repository : Resources and datasets (Script to create database : "NorthwindEdit1.sql")
@@ -16,22 +21,110 @@ SQL Server
     a class called ConnectDB was used to create the connections to the database
     Change the connection string only at this location to suit the local db/server where the database will be located
 
-# Project resources links
+# Project Demonstration/Explanaition
 
-- [PEXELS](https://www.pexels.com) - Free stock photos and videos.
+![Alt text](gallery/Login.JPG)
+- The Login 
 
-# Project Explanaition
+![Alt text](gallery/MainWindow.JPG) 
+- The Main Window where you can view the inventory
 
-![image](https://user-images.githubusercontent.com/109286764/213029672-b4a7ec0e-c3b9-46af-9fd2-4b42b489de69.png)
+![Alt text](gallery/SearchBar.JPG) 
+- The search bar can search by product name or ID, it can also allow dynamic search as you type.
 
-![image](https://user-images.githubusercontent.com/109286764/213029960-91edf4c7-9f09-4912-9c81-5aaf338af43e.png)
+![Alt text](gallery/ColourCodeLowStock.JPG) 
+- Colour code can be activated at the search bar to show low stock which can be set on the Right lower corner
 
-![image](https://user-images.githubusercontent.com/109286764/213030051-78cd372b-4db8-4dab-bfa8-8a38d68cbf1e.png)
+![Alt text](gallery/AddProduct.JPG) 
+- Form to add a new product
 
-![image](https://user-images.githubusercontent.com/109286764/213030142-3417db26-bd6b-4b97-96a7-f9b15870a1bf.png)
+![Alt text](gallery/UpdateProduct.JPG) 
+- Form to update an existing product
 
-![image](https://user-images.githubusercontent.com/109286764/213030247-7a274ddb-cdd3-4cb4-8459-d3b319c7cbfc.png)
+![Alt text](gallery/UpdateQuantity.JPG)
+- Form to update an existing products quantity
 
-![image](https://user-images.githubusercontent.com/109286764/213030607-db7c7743-457f-4e9e-ae8e-8fd69642c2be.png)
+![Alt text](gallery/ProductActive.JPG) 
+- Form to view Active products and option to deactivate the products
 
-![image](https://user-images.githubusercontent.com/109286764/213030686-aab9ad85-1756-40fa-bc72-3bf05d9d9b8a.png)
+![Alt text](gallery/ProductInactive.JPG) 
+- Form to view Inactive products and option to activate the products
+
+# Database Connection
+## The main connection class
+- There are many ways to connect to a database
+  - 
+- For this project we used a custom connectivity class called DBConnect
+- This is the class you must modify for the system to work locally on your machine after install SQLServer and create the databases provide in the directory 'databaseInfo'
+
+```C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+
+namespace projectIMSBasicWFA
+{
+    class DBConnect
+    {
+        public string ConnString = "Data Source=[LOCAL_DATABASE_NAME]; Initial Catalog=Northwind; Integrated Security=True";
+        public string Sql { get; set; }
+        public string SqlWhere { get; set; }
+        public  SqlConnection SqlConn { get; set; }
+        public SqlCommand Cmd { get; set; }
+        public  SqlDataAdapter DA { get; set; }
+
+        public string tableName = "";
+        public string searchProperty = "";
+        public int searchValue = 0;
+
+        public DBConnect(string tableName)
+        {
+            Sql = "SELECT * FROM " + tableName;
+            SqlConn = new SqlConnection(ConnString);
+            Cmd = new SqlCommand(Sql, SqlConn);
+            DA = new SqlDataAdapter(Cmd);
+            SqlCommandBuilder cmdBuild = new SqlCommandBuilder(DA);
+        }
+
+        public DBConnect(string tableName, string sqlWhere)
+        {
+            Sql = "SELECT * FROM " + tableName + " WHERE " + sqlWhere;
+            SqlConn = new SqlConnection(ConnString);
+            Cmd = new SqlCommand(Sql, SqlConn);
+            DA = new SqlDataAdapter(Cmd);
+            SqlCommandBuilder cmdBuild = new SqlCommandBuilder(DA);
+        }
+
+        public DBConnect(string tableName, string Database, string sqlWhere)
+        {
+            Sql = "SELECT * FROM " + Database + ".dbo." + tableName + " WHERE " + sqlWhere;
+            SqlConn = new SqlConnection(ConnString);
+            Cmd = new SqlCommand(Sql, SqlConn);
+            DA = new SqlDataAdapter(Cmd);
+            SqlCommandBuilder cmdBuild = new SqlCommandBuilder(DA);
+        }
+
+    }
+
+}
+
+```
+## The SQLServer Database setup
+- Two databases are used
+  - Northwind (Free database from microsoft repository)
+  - LoginDB
+- This was done to keep the Northwind DB as is while allowing for a login option for the system
+
+## The LoginDB database
+
+![Alt text](gallery/LoginTableDesign.JPG)
+- The Design of the DB
+
+![Alt text](gallery/LoginTableDesignKeyIncrement.JPG)
+- The seeding and auto-increment setting
+
+![Alt text](gallery/LoginTableData.JPG)
+- The data

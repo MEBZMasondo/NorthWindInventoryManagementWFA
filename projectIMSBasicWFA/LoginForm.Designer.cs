@@ -56,7 +56,6 @@
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(199, 29);
             this.userNameTextBox.TabIndex = 1;
-            this.userNameTextBox.Text = "admin01";
             // 
             // groupBox1
             // 
@@ -111,7 +110,6 @@
             this.passwordMaskedTextBox.Name = "passwordMaskedTextBox";
             this.passwordMaskedTextBox.Size = new System.Drawing.Size(199, 29);
             this.passwordMaskedTextBox.TabIndex = 3;
-            this.passwordMaskedTextBox.Text = "Password01";
             this.passwordMaskedTextBox.UseSystemPasswordChar = true;
             // 
             // label2

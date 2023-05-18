@@ -9,7 +9,7 @@ namespace projectIMSBasicWFA
 {
     class DBConnect
     {
-        public string ConnString = "Data Source=DESKTOP-LPIKMUM; Initial Catalog=Northwind; Integrated Security=True";
+        public string ConnString = "Data Source=LAPTOP-6TOSCMBP\\SQLEXPRESS; Initial Catalog=Northwind; Integrated Security=True";
         public string Sql { get; set; }
         public string SqlWhere { get; set; }
         public  SqlConnection SqlConn { get; set; }
