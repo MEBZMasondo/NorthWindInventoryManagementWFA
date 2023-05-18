@@ -13,14 +13,6 @@
 - Programming Language  
   - Visual C# Programming language
 
-# Project Database Connectivity
-- Access the database creation script on the repository : Resources and datasets (Script to create database : "NorthwindEdit1.sql")
-- This dataset has an extra table : Login , used for login credentials. username: Admin01 password: Password01
-- change the connection strings to fit to your local databases:
-  In the first project (project name):
-    a class called ConnectDB was used to create the connections to the database
-    Change the connection string only at this location to suit the local db/server where the database will be located
-
 # Project Demonstration/Explanaition
 
 ![Alt text](gallery/Login.JPG)
@@ -50,10 +42,11 @@
 ![Alt text](gallery/ProductInactive.JPG) 
 - Form to view Inactive products and option to activate the products
 
-# Database Connection
+# Project Database Connectivity
+- Login database, used for login credentials. username: Admin0, password: Password
+
 ## The main connection class
-- There are many ways to connect to a database
-  - 
+- There are many ways to connect to a database.
 - For this project we used a custom connectivity class called DBConnect
 - This is the class you must modify for the system to work locally on your machine after install SQLServer and create the databases provide in the directory 'databaseInfo'
 
